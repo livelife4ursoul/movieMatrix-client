@@ -12,18 +12,19 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((movies) => {
         const moviesFromApi = movies.map((movie) => {
+          console.log(movies);
           return {
             ID: movie._id,
             Title: movie.Title,
             Description: movie.Description,
-            Image: movie.imagePath,
+            Image: movie.ImagePath,
             Genre: {
               name: movie.Genre.Name
             },
             Director: {
               name: movie.Director.Name
-            }
-            // Featured: movie.Featured
+            },
+            Featured: movie.Featured
           };
         });
        
