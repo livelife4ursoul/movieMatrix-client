@@ -24,14 +24,14 @@ export const MovieView = ({ movie, onBackClick }) => {
       </div>
       <div>
         <span>Featured: </span>
-        <span>{movie.Featured.toString()}</span>
+        <span>{movie.Featured}</span>
       </div>
       <button onClick={onBackClick}>Back</button>
     </div>
   );
 };
 
-MovieView.PropTypes = {
+MovieView.propTypes = {
   movie: PropTypes.shape({
     ImagePath: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
