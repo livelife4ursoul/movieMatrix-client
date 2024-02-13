@@ -27185,13 +27185,25 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
+var _loginView = require("../login-view/login-view");
+var _signupView = require("../signup-view/signup-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null);
+    const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
-        fetch("https://movie-matrix-b7781b74e464.herokuapp.com/movies").then((response)=>response.json()).then((movies)=>{
+        if (!token) return;
+        fetch("https://movie-matrix-b7781b74e464.herokuapp.com/movies", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((movies)=>{
+            console.log(movies);
             const moviesFromApi = movies.map((movie)=>{
                 console.log(movies);
                 return {
@@ -27210,40 +27222,76 @@ const MainView = ()=>{
             });
             setMovies(moviesFromApi);
         });
-    }, []);
+    }, [
+        token
+    ]);
+    if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
+                onLoggedIn: (user, token)=>{
+                    setUser(user);
+                    setToken(token);
+                }
+            }, void 0, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 50,
+                columnNumber: 9
+            }, undefined),
+            "or",
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 57,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 37,
+        lineNumber: 64,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The Movie List is Empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 43,
+        lineNumber: 70,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: movie,
-                onMovieClick: (newSelectedMovie)=>{
-                    setSelectedMovie(newSelectedMovie);
-                }
-            }, movie.ID, false, {
+        children: [
+            movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                    movie: movie,
+                    onMovieClick: (newSelectedMovie)=>{
+                        setSelectedMovie(newSelectedMovie);
+                    }
+                }, movie.ID, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 75,
+                    columnNumber: 9
+                }, undefined)),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>{
+                    setUser(null);
+                    setToken(null);
+                    localStorage.clear();
+                },
+                children: "Logout"
+            }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 48,
-                columnNumber: 9
-            }, undefined))
-    }, void 0, false, {
+                lineNumber: 83,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 46,
+        lineNumber: 73,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
+_s(MainView, "p9Ck8pkXr+ngX1DzR4zohGgGv+8=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27253,7 +27301,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bwuIu":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN"}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28335,7 +28383,7 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.Featured.toString()
+                        children: movie.Featured
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 27,
@@ -28363,7 +28411,7 @@ const MovieView = ({ movie, onBackClick })=>{
     }, undefined);
 };
 _c = MovieView;
-MovieView.PropTypes = {
+MovieView.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         ImagePath: (0, _propTypesDefault.default).string.isRequired,
         Title: (0, _propTypesDefault.default).string.isRequired,
@@ -28385,6 +28433,258 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","prop-types":"7wKI2"}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire6971")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","prop-types":"7wKI2"}],"9YtA0":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9fee.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LoginView", ()=>LoginView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _s = $RefreshSig$();
+const LoginView = ({ onLoggedIn })=>{
+    _s();
+    const [Username, setUsername] = (0, _react.useState)("");
+    const [Password, setPassword] = (0, _react.useState)("");
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+        const data = {
+            Username: Username,
+            Password: Password
+        };
+        fetch("https://movie-matrix-b7781b74e464.herokuapp.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((response)=>response.json()).then((data)=>{
+            console.log("Login response: ", data);
+            if (data.user) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", data.token);
+                onLoggedIn(data.user, data.token);
+            } else alert("This user does not exist");
+        }).catch((e)=>{
+            alert("Something went wrong");
+        });
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+        onSubmit: handleSubmit,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                children: [
+                    "Username:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        type: "text",
+                        value: Username,
+                        onChange: (e)=>setUsername(e.target.value),
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/login-view/login-view.jsx",
+                        lineNumber: 41,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 39,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                children: [
+                    "Password:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        type: "password",
+                        value: Password,
+                        onChange: (e)=>setPassword(e.target.value),
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/login-view/login-view.jsx",
+                        lineNumber: 50,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 48,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                type: "submit",
+                children: "Submit"
+            }, void 0, false, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 57,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/login-view/login-view.jsx",
+        lineNumber: 38,
+        columnNumber: 5
+    }, undefined);
+};
+_s(LoginView, "QXyMHHVFQFTzqWVk6/PVAJyjUCk=");
+_c = LoginView;
+var _c;
+$RefreshReg$(_c, "LoginView");
+
+  $parcel$ReactRefreshHelpers$9fee.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4OGiN":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$73d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$73d1.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SignupView", ()=>SignupView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _s = $RefreshSig$();
+const SignupView = ()=>{
+    _s();
+    const [Username, setUsername] = (0, _react.useState)("");
+    const [Password, setPassword] = (0, _react.useState)("");
+    const [Email, setEmail] = (0, _react.useState)("");
+    const [Birthday, setBirthday] = (0, _react.useState)("");
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+        const data = {
+            Username: Username,
+            Password: Password,
+            Email: Email,
+            Birthday: Birthday
+        };
+        fetch("https://movie-matrix-b7781b74e464.herokuapp.com", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response)=>{
+            if (response.ok) {
+                alert("You have been successfully created an account");
+                window.location.reload();
+            } else alert("Signup has failed. Please try again.");
+        });
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+        onSubmit: handleSubmit,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                children: [
+                    "Username:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        type: "text",
+                        value: Username,
+                        onChange: (e)=>setUsername(e.target.value),
+                        minLength: "6",
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/signup-view/signup-view.jsx",
+                        lineNumber: 38,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/signup-view/signup-view.jsx",
+                lineNumber: 36,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                children: [
+                    "Password:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        type: "password",
+                        value: Password,
+                        onChange: (e)=>setPassword(e.target.value),
+                        minLength: "6",
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/signup-view/signup-view.jsx",
+                        lineNumber: 48,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/signup-view/signup-view.jsx",
+                lineNumber: 46,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                children: [
+                    "Email:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        type: "email",
+                        value: Email,
+                        onChange: (e)=>setEmail(e.target.value),
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/signup-view/signup-view.jsx",
+                        lineNumber: 58,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/signup-view/signup-view.jsx",
+                lineNumber: 56,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                children: [
+                    "Birthday:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                        type: "date",
+                        value: Birthday,
+                        onChange: (e)=>setBirthday(e.target.value),
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/signup-view/signup-view.jsx",
+                        lineNumber: 67,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/signup-view/signup-view.jsx",
+                lineNumber: 65,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                type: "submit",
+                children: "Submit"
+            }, void 0, false, {
+                fileName: "src/components/signup-view/signup-view.jsx",
+                lineNumber: 74,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/signup-view/signup-view.jsx",
+        lineNumber: 35,
+        columnNumber: 5
+    }, undefined);
+};
+_s(SignupView, "D0lB37FO5C6TvcokQK9Cc01QTS8=");
+_c = SignupView;
+var _c;
+$RefreshReg$(_c, "SignupView");
+
+  $parcel$ReactRefreshHelpers$73d1.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire6971")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
