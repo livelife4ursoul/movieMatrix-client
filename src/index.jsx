@@ -1,5 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import { MainView } from './components/main-view/main-view';
+import Container from 'react-bootstrap/Container';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
@@ -7,9 +10,9 @@ import './index.scss';
 //Main component (will eventually use all the others)
 const MovieMatrixApp = () => {
   return (
-    <div className='movieMatrix'>
+    <Container>
       <MainView />
-    </div>
+    </Container>
   );  
 };
 

@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
     <div>
       <div>
-        <img src={movie.Image} />
+        <img className='w-50' src={movie.Image} />
       </div>
       <div>
         <span>Title: </span>
@@ -26,7 +30,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <span>Featured: </span>
         <span>{movie.Featured}</span>
       </div>
-      <button onClick={onBackClick}>Back</button>
+      <Button onClick={onBackClick}>Back</Button>
     </div>
   );
 };
