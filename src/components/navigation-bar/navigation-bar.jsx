@@ -35,7 +35,8 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                     <Nav.Link as={Link} to="/">
                       All Movies
                     </Nav.Link>
-                    <Nav.Link>Profile</Nav.Link>
+                    <Nav.Link as={Link} to={`/profile/${user.Username}`}>Profile</Nav.Link>
+                    <Nav.Link as={Link} to={`/topmovies/${user.Username}`}>Top Movies</Nav.Link>
                     <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
                     <Form className="d-flex">
                       <Form.Control
