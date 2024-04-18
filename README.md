@@ -14,7 +14,7 @@ The application is built with the MERN stack, which includes MongoDB, Express, R
 
 ## Links
 
-- [Live Demo](https://example.com): The live demo of the application (if applicable).
+- [Live Demo](https://mymoviematrix.netlify.app/): Link to live demo of the application.
 - [API Documentation]([#README.md]): Link to API documentation within this README.
 
 ## Features
