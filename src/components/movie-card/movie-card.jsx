@@ -23,21 +23,20 @@ export const MovieCard = ({ addTopMovie, removeTopMovie, user, movie }) => {
   };
  
   return (
-    <Card className='h-100' style={{ display: 'flex', cursor: 'pointer' }}>
-      <Link to={`/movies/${encodeURIComponent(movie.ID)}`}>
-        <Card.Img  variant='top' src={movie.Image} />
-      </Link>
-        <div>
+    <Card className='h-100 bg-success text-warning' style={{ display: 'flex', cursor: 'pointer' }}>
+      <Card.Body>
+        <Link to={`/movies/${encodeURIComponent(movie.ID)}`}>
+          <Card.Img style={{ }} variant='top' src={movie.Image} />
+        </Link>
+        <div className='bg-secondary'>
           <Checkbox 
             icon={<FavoriteBorderIcon />}
             checkedIcon={<FavoriteIcon />}
             checked={isFavorite}
             onClick={toggleFavorite}
           />
-        </div>
-      <Card.Body>
-        {/* <Card.Title>{movie.Title}</Card.Title> */}
-        <Card.Title>{movie.Title}</Card.Title>
+        </div>  
+        <Card.Title className='mt-5'>{movie.Title}</Card.Title>
       </Card.Body>
     </Card>
   );
@@ -52,5 +51,3 @@ MovieCard.propTypes = {
   addTopMovie: PropTypes.func.isRequired,
   removeTopMovie: PropTypes.func.isRequired,
 };
-
-{/* <Col className='d-flex flex-wrap justify-content-center mb-4' md={4}></Col> */}

@@ -1,5 +1,20 @@
 $color: steelBlue;
+$body-bg: rgb(74, 53, 88);
+$success: rgb(60, 126, 107);
+$secondary: rgb(74, 53, 88);
+$border-radius: 5px;
+$spacer: 7px;
+$btn-padding-y: 10px;
+$input-placeholder-color: rgb(60, 126, 107);
+$input-color:  rgb(60, 126, 107);
+$border-color: rgb(60, 126, 107);
+$favorite-icon: rgb(74, 53, 88);
+
+
+@import '~bootstrap/scss/bootstrap.scss';
 
 .movieMatrix {
   color: $color;
+  
 }
+

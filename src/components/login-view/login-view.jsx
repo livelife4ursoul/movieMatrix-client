@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Card, Form }from 'react-bootstrap';
+// import Form from 'react-bootstrap/Form';
 
 export const LoginView = ({onLoggedIn}) => {
   const [Username, setUsername] = useState('');
@@ -35,11 +35,13 @@ export const LoginView = ({onLoggedIn}) => {
     }); 
   }; 
   
-
   return (
+    
+    <Card className='d-flex flex-wrap align-items-center bg-dark mt-5 border-success'>
+      <h3 className='mt-5 text-success'>Account Login: </h3>
     <Form onSubmit={handleSubmit}>
       <Form.Group>
-        <Form.Label>Username:</Form.Label> 
+        <Form.Label className='text-success mt-5'>Username:</Form.Label> 
         <Form.Control 
           type='text'
           value={Username}
@@ -48,7 +50,7 @@ export const LoginView = ({onLoggedIn}) => {
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Password:</Form.Label>
+        <Form.Label className='text-success mt-5'>Password:</Form.Label>
         <Form.Control 
           type='password'
           value={Password}
@@ -56,9 +58,10 @@ export const LoginView = ({onLoggedIn}) => {
           required
          /> 
       </Form.Group>
-      <Button variant='primary' type='submit'>
+      <Button className='mt-5 mb-5' variant='success' type='submit'>
         Submit
       </Button>
     </Form>
+    </Card>
   );
 };
