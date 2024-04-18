@@ -17,6 +17,8 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken? storedToken: null);
   const [movies, setMovies ] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
   
   useEffect(() => {
     if (!token) {
@@ -47,10 +49,28 @@ export const MainView = () => {
             
           };
         });
-       
         setMovies(moviesFromApi);
+        setFilteredMovies(moviesFromApi);
       });
   }, [token]);
+
+  const handleSearch = (searchKeyword) => {
+    setSearchKeyword(searchKeyword);
+    if(!searchKeyword) {
+      setFilteredMovies(movies);
+    }
+  };
+
+  useEffect(() => {
+    if(!searchKeyword) {
+      setFilteredMovies(movies);
+    } else {
+      const filteredMovies = movies.filter((movie) =>
+        movie.Title.toLowerCase().includes(searchKeyword.toLowerCase())
+      );
+      setFilteredMovies(filteredMovies);
+    }
+  }, [searchKeyword, movies]);
 
   //Add Top Movie
   const addTopMovie = (_id) => {
@@ -105,6 +125,10 @@ export const MainView = () => {
           setToken(null);
           localStorage.clear();
         }}
+        searchKeyword={searchKeyword}
+        handleSearch={handleSearch}
+        setFilteredMovies={setFilteredMovies}
+        filteredMovies={filteredMovies}
       />
       <Row className='justify-content-md-center'>
         <Routes>
@@ -115,7 +139,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to='/' />
                 ) : (
-                  <Col md={5}>
+                  <Col md={6}>
                     <SignupView />
                   </Col>
                 )}
@@ -129,7 +153,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to='/' />
                 ) : (
-                  <Col md={5}>
+                  <Col md={6}>
                     <LoginView onLoggedIn={(user, token) => {
                       setUser(user);
                       setToken(token);
@@ -149,9 +173,8 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col>This list of movies is empty!</Col>
                 ) : (
-                  <Col md={8}>
+                  <Col>
                     <MovieView 
-                      img='w-75'
                       movies={movies}
                       movie={movies} 
                       user={user} 
@@ -169,26 +192,48 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to='/login' replace />
-                ) : movies.length === 0 ? (
-                  <Col>This list of movies is empty!</Col>
-                ) : (
-                  <>
-                    {movies.map((movie) => (
-                      <Col className='mb-4' key={movie.ID} md={3}>
-                        <MovieCard
-                          key={movie.ID} 
-                          movie={movie}
-                          addTopMovie={addTopMovie}
-                          removeTopMovie={removeTopMovie}
-                          user={user}
-                        />
-                      </Col>
-                    ))}
-                  </>
-                ) }
+                  ) : movies.length === 0 ? (
+                    <Col>This movie list is empty!</Col>
+                  ) : (
+                    <>
+                      {filteredMovies.length > 0 ? (
+                    <>
+                      {filteredMovies.map((movie) => (
+                        <Col key={movie.ID} className='mb-5' xs={12} sm={6} md={4} lg={3} xl={2}>
+                          <MovieCard 
+                            movie={movie}
+                            addTopMovie={addTopMovie}
+                            removeTopMovie={removeTopMovie}
+                            user={user}
+                            filteredMovies={filteredMovies}
+                            handleSearch={handleSearch}
+                            searchKeyword={searchKeyword}
+                          />
+                        </Col>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {movies.map((movie) => (
+                        <Col key={movie.ID} className='mb-5' xs={12} sm={6} md={4} lg={3} xl={2}>
+                          <MovieCard 
+                            movie={movie}
+                            addTopMovie={addTopMovie}
+                            removeTopMovie={removeTopMovie}
+                            user={user}
+                          />
+                        </Col>
+                      ))}
+                    </>
+                  )
+                }
+                    </>
+                  )
+                }
               </>
-            }
+            }          
           />
+         
           <Route 
             path='/profile/:Username'
             element={
@@ -196,7 +241,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to='/login' replace />
                 ) : (
-                  <>
+                  <Col md={6}>
                     <ProfileView 
                       token={token}
                       movies={movies}
@@ -206,7 +251,7 @@ export const MainView = () => {
                       removeTopMovie={removeTopMovie}
                     />
                     
-                  </>
+                  </Col>
                 )}  
               </>
             }

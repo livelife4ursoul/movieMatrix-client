@@ -84,17 +84,18 @@ export const ProfileView = ({ user, setUser }) => {
     <Container>     
       <Row>
         <Col>
-          <Card>
-            <Card.Title>{capitalizeFirstLetter(user.Username)}'s Movie Matrix Profile</Card.Title>
+          <Card className='d-flex flex-wrap align-items-center bg-dark text-success border-success mt-5'>
+            <h3 className='mt-5 text-warning bg-secondary'>{capitalizeFirstLetter(user.Username)}'s Movie Matrix Profile:</h3>
               <Card.Body>
                 <Card.Text>Email: {user.Email}</Card.Text>
                 <Card.Text>Birthday: {formatBirthday(user.Birthday)}</Card.Text>
+                <Card.Link className='text-success' href={`/topmovies/${user.Username}`}>My Top Movies</Card.Link>
               </Card.Body>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col className='mt-5'>
           <UpdateUser
             setUsernameUpdate={setUsernameUpdate} 
             setPasswordUpdate={setPasswordUpdate}
@@ -108,5 +109,3 @@ export const ProfileView = ({ user, setUser }) => {
     </Container>
   );
 };
-
-{/* <Col className="d-flex flex-wrap justify-content-center" md={3}> */}

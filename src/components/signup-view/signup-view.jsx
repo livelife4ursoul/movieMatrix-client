@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Card, Form } from 'react-bootstrap';
 
 export const SignupView = () => {
   const [Username, setUsername] = useState('');
@@ -34,38 +33,43 @@ export const SignupView = () => {
     });
   };
   return (
+    <Card className='d-flex flex-wrap align-items-center bg-dark text-success border-success mt-5'>
+      <h3 className='mt-5 text-success'>New Account Signup: </h3>
     <Form onSubmit={handleSubmit}>
       <Form.Group>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control 
+        <Form.Label className='text-success mt-5'>Username:</Form.Label>
+        <Form.Control
           type='text'
           value={Username}
+          placeholder='At least 6 characters'
           onChange={(e) => setUsername(e.target.value)}
           minLength='6'
           required
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Password:</Form.Label>
+        <Form.Label className='text-success mt-5'>Password:</Form.Label>
         <Form.Control 
           type='password'
           value={Password}
+          placeholder='At least 6 characters'
           onChange={(e) => setPassword(e.target.value)}
           minLength='6'
           required
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Email:</Form.Label>
+        <Form.Label className='text-success mt-5'>Email:</Form.Label>
         <Form.Control 
           type='email'
           value={Email}
+          placeholder='Type email here please'
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Birthday:</Form.Label> 
+        <Form.Label className='text-success mt-5'>Birthday:</Form.Label> 
         <Form.Control 
           type='date'
           value={Birthday}
@@ -73,7 +77,8 @@ export const SignupView = () => {
           required
         />
       </Form.Group>
-      <Button variant='primary' type='submit'>Submit</Button>
+      <Button className='mt-5 mb-5' variant='success' type='submit'>Submit</Button>
     </Form>
+    </Card>
   );
 };

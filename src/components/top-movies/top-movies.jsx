@@ -18,7 +18,7 @@ export const TopMovies = ({ movies, user, addTopMovie, removeTopMovie }) => {
   return ( 
     <>
       <Row>
-        <Col xs={12}>
+        <Col xs={12} className='text-warning mb-5'>
           <h2 className='mt-5 text-center'>{capitalizeFirstLetter(user.Username)}'s Top Movies</h2>
         </Col>
       </Row>
@@ -38,6 +38,3 @@ export const TopMovies = ({ movies, user, addTopMovie, removeTopMovie }) => {
     </> 
   );
 };
-
-{/* <Row className='justify-content-center'>
-<Col className="d-flex flex-wrap justify-content-center" md={4}> */}

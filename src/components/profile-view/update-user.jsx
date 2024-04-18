@@ -4,12 +4,14 @@ import { Button, Card, Form } from 'react-bootstrap';
 export const UpdateUser = ({ handleUpdate, handleDelete, Username, Password, Email, Birthday, setUsernameUpdate, setPasswordUpdate, setEmailUpdate, setBirthdayUpdate }) => {
   return (
     <>
-      <Card.Title>Update User Profile</Card.Title>
+    <Card className='bg-dark mt-5 border-success'>
+      <Card.Title className='mb-5 mt-5 text-success'>Update Your Profile:</Card.Title>
+      <Card.Body>
           <Form onSubmit={handleUpdate}>
             <Form.Group controlId='formUsername'>
-              <Form.Label>Username:</Form.Label>
+              <Form.Label className='text-success'>Username:</Form.Label>
               <Form.Control 
-                className='mb-3'
+                className='mb-5 text-warning'
                 type='text'
                 value={Username}
                 onChange={(e) => setUsernameUpdate(e.target.value)}
@@ -17,8 +19,9 @@ export const UpdateUser = ({ handleUpdate, handleDelete, Username, Password, Ema
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Password:</Form.Label>
+              <Form.Label className='text-success'>Password:</Form.Label>
               <Form.Control 
+                className='mb-5 text-warning'
                 type='password'
                 value={Password}
                 onChange={(e) => setPasswordUpdate(e.target.value)}
@@ -26,24 +29,29 @@ export const UpdateUser = ({ handleUpdate, handleDelete, Username, Password, Ema
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Email:</Form.Label>
-              <Form.Control 
+              <Form.Label className='text-success'>Email:</Form.Label>
+              <Form.Control
+                className='mb-5 text-warning' 
                 type='email'
                 value={Email}
                 onChange={(e) => setEmailUpdate(e.target.value)}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Birthday:</Form.Label> 
+              <Form.Label className='text-success'>Birthday:</Form.Label> 
               <Form.Control 
+                className='mb-5 text-warning'
                 type='date'
                 value={Birthday}
                 onChange={(e) => setBirthdayUpdate(e.target.value)}
               />
             </Form.Group>
           </Form>
-            <Button type='submit' size='lg' onClick={handleUpdate} >Update Profile</Button>
-            <Button className='bg-danger' size='lg' onClick={handleDelete}>Delete Profile</Button>
+          
+            <Button type='submit' size='md' className='bg-success text-warning' onClick={handleUpdate} >Update Profile</Button>
+            <Button className='bg-danger text-warning' size='md' style={{ float: 'right' }} onClick={handleDelete}>Delete Profile</Button>
+            </Card.Body>
+            </Card>
     </>
   )
 }
